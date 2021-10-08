@@ -5,7 +5,7 @@ const {validation,controllerWrapper} = require('../../middlewares')
 const {products:productsSchema} = require('../../schemas')
 
 
-const {updateContacts,deleteContacts,addContacts,getContactsById,getContacts} = require('../../controllers')
+const {updateContacts,deleteContacts,addContacts,getContactsById,getContacts,updateFavoriteContacts} = require('../../controllers')
 
 
 
@@ -18,6 +18,8 @@ router.post('/', validation(productsSchema),controllerWrapper(addContacts))
 
 router.delete('/:contactId', controllerWrapper(deleteContacts))
 
-router.patch('/:contactId',validation(productsSchema), controllerWrapper(updateContacts))
+router.put('/:contactId',validation(productsSchema), controllerWrapper(updateContacts))
+
+router.patch('/:contactId/favorite', controllerWrapper(updateFavoriteContacts))
 
 module.exports = router

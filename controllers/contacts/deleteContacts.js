@@ -1,16 +1,18 @@
 const createError = require('http-errors')
-const {removeContact} = require('../../model/index')
+const Contact = require('../../model/Contact')
 
 const deleteContacts = async (req, res, next) => {
     const {contactId} = req.params
-    const message = await removeContact(contactId)
-    if (!message) {
-        throw new createError(404, 'contact is not Found')
+
+    const contact = await Contact.findByIdAndDelete(contactId)
+    if (!contact) {
+        throw new createError(404, `contact with id - ${contactId}  is not Found`)
     }
+    res.status(200)
     res.json({
         status: "success",
         code: 200,
-        data: message
+        data: contact
     })
 }
 
