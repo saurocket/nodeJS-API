@@ -1,5 +1,5 @@
 const createError = require('http-errors')
-const Contact = require('../../model/Contact')
+const Contact = require('../../../model/Contact')
 
 const createContacts = async (req, res, next) => {
     const result = await Contact.create(req.body)

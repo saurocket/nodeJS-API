@@ -1,5 +1,5 @@
 const createError = require('http-errors')
-const Contact = require('../../model/Contact')
+const Contact = require('../../../model/Contact')
 
 const deleteContacts = async (req, res, next) => {
     const {contactId} = req.params
