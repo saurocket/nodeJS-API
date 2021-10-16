@@ -4,7 +4,7 @@ const cors = require('cors')
 
 const authRouter = require('./routes/api/auth.js')
 const contactsRouter = require('./routes/api/contacts')
-
+const userRouter = require('./routes/api/user')
 
 const dotenv = require('dotenv')
 
@@ -25,7 +25,7 @@ app.use(express.json())
 
 app.use('/api/auth', authRouter)
 app.use('/api/contacts', contactsRouter)
-
+app.use('/api/user', userRouter)
 
 
 app.use((req, res) => {

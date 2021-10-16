@@ -1,7 +1,7 @@
 const express = require('express')
 const router = express.Router()
 
-const {validation,controllerWrapper} = require('../../middlewares')
+const {validation,controllerWrapper,authenticate} = require('../../middlewares')
 const {products:productsSchema} = require('../../schemas')
 
 
@@ -10,16 +10,16 @@ const {products:productsSchema} = require('../../schemas')
 const {contact} = require('../../controllers')
 
 
-router.get('/',controllerWrapper(contact.getContacts))
+router.get('/',authenticate, controllerWrapper(contact.getContacts))
 
-router.get('/:contactId', controllerWrapper(contact.getContactsById))
+router.get('/:contactId',authenticate, controllerWrapper(contact.getContactsById))
 
-router.post('/', validation(productsSchema),controllerWrapper(contact.addContacts))
+router.post('/',authenticate, validation(productsSchema),controllerWrapper(contact.addContacts))
 
-router.delete('/:contactId', controllerWrapper(contact.deleteContacts))
+router.delete('/:contactId',authenticate, controllerWrapper(contact.deleteContacts))
 
-router.put('/:contactId',validation(productsSchema), controllerWrapper(contact.updateContacts))
+router.put('/:contactId', authenticate, validation(productsSchema), controllerWrapper(contact.updateContacts))
 
-router.patch('/:contactId/favorite', controllerWrapper(contact.updateFavoriteContacts))
+router.patch('/:contactId/favorite',authenticate, controllerWrapper(contact.updateFavoriteContacts))
 
 module.exports = router

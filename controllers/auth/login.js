@@ -11,7 +11,7 @@ const login = async (req, res) => {
     }
     const {SECRET_KEY}= process.env;
     const payload = {id: user._id}
-    const token = jwt.sign(payload,SECRET_KEY, {expiresIn: '1h'})
+    const token = jwt.sign(payload,SECRET_KEY)
 
     const updateTokern = await User.findByIdAndUpdate(user._id, {token}, {new: true})
     console.log(updateTokern)
