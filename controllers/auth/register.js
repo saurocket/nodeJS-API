@@ -1,4 +1,5 @@
 const createError = require('http-errors')
+const gravatar = require('gravatar')
 
 const {User} = require('../../model/user')
 
@@ -8,8 +9,10 @@ const register = async (req, res) => {
     if (user){
         throw new createError(409, `Email - ${email} is already register`)
     }
-    const newUser = new User({email})
+    const avatar = gravatar.url(email)
+    const newUser = new User({email, avatar})
     newUser.setPassword(password)
+
     await newUser.save()
 
     res.status(201)
