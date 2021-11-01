@@ -4,3 +4,4 @@ idea
 yarn-error.log
 package-lock.json
 yarn.lock
+.env
