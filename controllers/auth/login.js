@@ -6,8 +6,8 @@ const jwt = require('jsonwebtoken')
 const login = async (req, res) => {
     const {email, password} = req.body;
     const user = await User.findOne({email})
-    if(!user || !user.comparePassword(password)){
-        throw new createError(401, `wrong password or email`)
+    if(!user || !user.verify || !user.comparePassword(password)){
+        throw new createError(401, `wrong password or email or email nor verify`)
     }
     const {SECRET_KEY}= process.env;
     const payload = {id: user._id}
